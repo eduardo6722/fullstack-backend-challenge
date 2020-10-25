@@ -1,0 +1,11 @@
+server:
+  port: 3333
+
+database:
+  type: 'postgres'
+  port: 5432
+  database: 'chartsdb'
+  host: '0.0.0.0'
+  username: 'postgres'
+  password: 'root'
+  synchronize: true
