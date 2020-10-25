@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { ChartData } from 'src/entities/chart/chart-data.entity';
+import { ChartData } from 'src/entities';
 
 export const chartProviders = [
   {

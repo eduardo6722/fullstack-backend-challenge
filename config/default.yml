@@ -9,3 +9,7 @@ database:
   username: 'postgres'
   password: 'root'
   synchronize: true
+
+jwt:
+  secret: 'super@s3cr3t'
+  expiresIn: '365d'

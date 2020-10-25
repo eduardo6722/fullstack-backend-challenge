@@ -1,11 +1,12 @@
 import { Repository } from 'typeorm';
 import {
-  BadRequestException,
   Inject,
   Injectable,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 
+import { User } from 'src/entities';
 import { ResponseMessage } from 'src/interfaces';
 import { ChartDataDto } from './dto/chart-data.dto';
 import { ChartData } from 'src/entities/chart/chart-data.entity';
@@ -48,13 +49,13 @@ export class ChartService {
     );
   }
 
-  public async get(): Promise<ChartData[]> {
-    return this.chartRepository.find();
+  public async get(user: User): Promise<ChartData[]> {
+    return this.chartRepository.find({ user });
   }
 
-  public async create(data: ChartDataDto): Promise<ChartData> {
-    const chartData = this.chartRepository.create(data);
-    const listData = await this.chartRepository.find();
+  public async create(data: ChartDataDto, user: User): Promise<ChartData> {
+    const chartData = this.chartRepository.create({ user, ...data });
+    const listData = await this.chartRepository.find({ user });
 
     if (!this.isParticipationOnCreateValid(data.participation, listData)) {
       this.throwBadRequestMessage(
@@ -62,14 +63,17 @@ export class ChartService {
       );
     }
 
-    return this.chartRepository.save(chartData);
+    const response = await this.chartRepository.save(chartData);
+    delete response.user;
+    return response;
   }
 
   public async update(
     id: number,
     { firstName, lastName, participation }: ChartDataDto,
+    user: User,
   ): Promise<ResponseMessage> {
-    const foundData = await this.chartRepository.findOne(id);
+    const foundData = await this.chartRepository.findOne({ id, user });
 
     if (!foundData) {
       this.throwNotFoundRespose('Chart data not found!');
@@ -94,8 +98,8 @@ export class ChartService {
     };
   }
 
-  public async remove(id: number): Promise<ResponseMessage> {
-    const data = await this.chartRepository.findOne(id);
+  public async remove(id: number, user: User): Promise<ResponseMessage> {
+    const data = await this.chartRepository.findOne({ id, user });
 
     if (!data) {
       this.throwNotFoundRespose('Data not found');

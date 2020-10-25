@@ -1,6 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { User } from '../user/user.entity';
 
 @Entity({ name: 'chart_data' })
+@Unique(['id'])
 export class ChartData {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,4 +25,8 @@ export class ChartData {
 
   @Column('int')
   participation: number;
+
+  @ManyToOne(() => User, { nullable: false })
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }
