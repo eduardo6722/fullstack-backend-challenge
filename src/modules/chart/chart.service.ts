@@ -79,7 +79,7 @@ export class ChartService {
       this.throwNotFoundRespose('Chart data not found!');
     }
 
-    const listData = await this.chartRepository.find();
+    const listData = await this.chartRepository.find({ user });
 
     if (!this.isParticipationOnUpdateValid(id, participation, listData)) {
       this.throwBadRequestMessage(
