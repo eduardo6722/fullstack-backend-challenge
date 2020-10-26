@@ -12,7 +12,7 @@ ENV NODE_OPTIONS=--max_old_space_size=8192
 
 RUN npm run build
 
-EXPOSE 8080
+EXPOSE 3333
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
