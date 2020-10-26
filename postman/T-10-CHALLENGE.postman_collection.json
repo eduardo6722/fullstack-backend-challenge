@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "13a5ecdd-221b-4f2e-82bb-02b75ebe641b",
+		"name": "T-10-CHALLENGE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CHART DATA",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Eduardo\",\n    \"lastName\": \"Freitas\",\n    \"participation\": 50,\n    \"color\": \"#00b8e2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/chart",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"chart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"EduardOOOo\",\n    \"lastName\": \"Freitas\",\n    \"participation\": 50,\n    \"color\": \"#00b8e2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/chart/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"chart",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/chart/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"chart",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/chart",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"chart"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "SIGNIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5a03b623-a46f-4622-b4ab-2f090f32d7b7",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"",
+									"if(data.accessToken)",
+									"{",
+									"    postman.setEnvironmentVariable(\"TOKEN\", data.accessToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eduardo@mail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/signin",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SIGNUP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d70c773b-9737-4083-bc00-1de72d970dee",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"",
+									"if(data.accessToken)",
+									"{",
+									"    postman.setEnvironmentVariable(\"TOKEN\", data.accessToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eduardo@mail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/auth/signup",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

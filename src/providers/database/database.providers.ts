@@ -28,7 +28,7 @@ export const databaseProviders = [
       await createConnection({
         type: 'postgres' || type,
         host: RDS_HOSTNAME || host,
-        port: Number(RDS_PORT) || port,
+        port: RDS_PORT || port,
         username: RDS_USERNAME || username,
         password: RDS_PASSWORD || password,
         database: RDS_DB_NAME || database,

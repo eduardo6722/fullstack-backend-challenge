@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  api:
+    container_name: t10-api
+    build: '..'
+    environment:
+      - NODE_ENV=development
+      - RDS_HOSTNAME=postgres
+    depends_on:
+      - postgres
+    networks:
+      - local-network
+    ports:
+      - '3333:3333'
+
+  postgres:
+    container_name: t10-db
+    image: postgres:12-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres:/data
+    environment:
+      POSTGRES_DB: 'chartsdb'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'root'
+    networks:
+      - local-network
+
+volumes:
+  postgres:
+
+networks:
+  local-network:
+    driver: bridge
